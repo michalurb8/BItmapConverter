@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cstdio>
 #include <ctime>
+#include <cmath>
 
 int main()
 {
