@@ -12,6 +12,6 @@ int main()
 	b.SetPixel(0,5,255,255,0);
 	b.SetPixel(4,5,0,255,255);
 	b.Print();
-	b.Export("abecede");
+	b.Export("example");
 	return 0;
 }

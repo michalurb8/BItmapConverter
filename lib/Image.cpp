@@ -75,7 +75,7 @@ void Image::ChangePixel(UINT xArg, UINT yArg, int rArg, int gArg, int bArg)
 }
 void Image::Export(std::string name) const
 {
-	std::ofstream output(name);
+	std::ofstream output(name + ".bmp");
 	output << "BM";
 	output << UCH(size%256);
 	output << UCH((size/256)%256);
