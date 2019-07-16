@@ -67,11 +67,25 @@ Pixel Image::GetPixel(UINT xArg, UINT yArg) const
 }
 void Image::SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
 {
+	if(xArg >= width) xArg = width - 1;
+	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].SetColor(rArg, gArg, bArg);
 }
 void Image::ChangePixel(UINT xArg, UINT yArg, int rArg, int gArg, int bArg)
 {
+	if(xArg >= width) xArg = width - 1;
+	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].ChangeColor(rArg, gArg, bArg);
+}
+void Image::SetAll(int rArg, int gArg, int bArg)
+{
+	for(int y = 0; y < height; ++y)
+	{
+		for(int x = 0; x < width; ++x)
+		{
+			array[width * y + x].SetColor(rArg, gArg, bArg);
+		}
+	}
 }
 void Image::Export(std::string name) const
 {

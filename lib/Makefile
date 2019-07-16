@@ -1,6 +1,7 @@
 all: main.o Pixel.o Image.o
 	g++ ../out/main.o ../out/Pixel.o ../out/Image.o -o ../out/exe
 	../out/exe
+	timeout 1s eog default.bmp
 main.o: main.cpp
 	g++ -c main.cpp -o ../out/main.o
 Pixel.o: Pixel.cpp
