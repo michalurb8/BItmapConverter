@@ -17,20 +17,31 @@ Pixel Pixel::SetColor(UCH rArg, UCH gArg, UCH bArg)
 	R = (UCH)rArg;
 	G = (UCH)gArg;
 	B = (UCH)bArg;
+	return *this;
 }
-Pixel Pixel::ChangeColor(int rArg, int gArg, int bArg)
+Pixel Pixel::ChangeColor(UCH rArg, UCH gArg, UCH bArg)
+{
+	R = rArg > 255 - R ? 255 : R + rArg; 
+	G = gArg > 255 - G ? 255 : G + gArg; 
+	B = bArg > 255 - B ? 255 : B + bArg; 
+	return *this;
+}
+Pixel Pixel::CycleColor(UCH rArg, UCH gArg, UCH bArg)
 {
 	R += (UCH)rArg;
 	G += (UCH)gArg;
 	B += (UCH)bArg;
+	return *this;
 }
 Pixel Pixel::SetRed(UCH rArg)
 {
 	R = rArg;
+	return *this;
 }
 Pixel Pixel::SetGreen(UCH gArg)
 {
 	G = gArg;
+	return *this;
 }
 Pixel Pixel::SetBlue(UCH bArg)
 {

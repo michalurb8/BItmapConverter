@@ -65,19 +65,28 @@ Pixel Image::GetPixel(UINT xArg, UINT yArg) const
 {
 	return array[width * yArg + xArg];
 }
-void Image::SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+Image Image::SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
 {
 	if(xArg >= width) xArg = width - 1;
 	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].SetColor(rArg, gArg, bArg);
+	return *this;
 }
-void Image::ChangePixel(UINT xArg, UINT yArg, int rArg, int gArg, int bArg)
+Image Image::ChangePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
 {
 	if(xArg >= width) xArg = width - 1;
 	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].ChangeColor(rArg, gArg, bArg);
+	return *this;
 }
-void Image::SetAll(int rArg, int gArg, int bArg)
+Image Image::CyclePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+{
+	if(xArg >= width) xArg = width - 1;
+	if(yArg >= height) yArg = height - 1;
+	array[width * yArg + xArg].CycleColor(rArg, gArg, bArg);
+	return *this;
+}
+Image Image::SetAll(UINT rArg, UINT gArg, UINT bArg)
 {
 	for(int y = 0; y < height; ++y)
 	{
@@ -86,6 +95,7 @@ void Image::SetAll(int rArg, int gArg, int bArg)
 			array[width * y + x].SetColor(rArg, gArg, bArg);
 		}
 	}
+	return *this;
 }
 void Image::Export(std::string name) const
 {

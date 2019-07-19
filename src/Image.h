@@ -20,8 +20,9 @@ public:
 	UINT GetHeight() const;
 	void Print() const;
 	Pixel GetPixel(UINT xArg, UINT yArg) const;
-	void SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);
-	void ChangePixel(UINT xArg, UINT yArg, int rArg, int gArg, int bArg);
-	void SetAll(int rArg, int gArg, int bArg);
+	Image SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);
+	Image ChangePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);
+	Image CyclePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);
+	Image SetAll(UINT rArg, UINT gArg, UINT bArg);
 	void Export(std::string fileName = "default") const;
 };
