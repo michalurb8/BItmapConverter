@@ -3,11 +3,11 @@
 
 int main()
 {
-	Image b(5,6);
-	b.SetAll(0,0,0);
-	for(int i = 0; i < 260; ++i)
+	Image b(1000,1000);
+	b.SetAll(0, 0, 0);
+	for(int i = 0; i < 100000; ++i)
 	{
-		b.CyclePixel(0,0,1,1,1);
+		b.SetPixel(0,0,100,100,100);
 	}
 	b.Export();
 	return 0;

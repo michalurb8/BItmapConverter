@@ -2,12 +2,12 @@
 #include <fstream>
 #include "Image.h"
 
-Image::Image()
+/*Image::Image()
 {
 	width = 1;
 	height = 1;
 	Set();
-}
+} */
 Image::Image(UINT wArg, UINT hArg)
 {
 	if(!wArg) wArg = 1;
@@ -61,32 +61,29 @@ void Image::Print() const
 		std::cout << std::endl;
 	}
 }
-Pixel Image::GetPixel(UINT xArg, UINT yArg) const
+Pixel& Image::GetPixel(UINT xArg, UINT yArg) const
 {
 	return array[width * yArg + xArg];
 }
-Image Image::SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+void Image::SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
 {
 	if(xArg >= width) xArg = width - 1;
 	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].SetColor(rArg, gArg, bArg);
-	return *this;
 }
-Image Image::ChangePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+void Image::ChangePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
 {
 	if(xArg >= width) xArg = width - 1;
 	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].ChangeColor(rArg, gArg, bArg);
-	return *this;
 }
-Image Image::CyclePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+void Image::CyclePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
 {
 	if(xArg >= width) xArg = width - 1;
 	if(yArg >= height) yArg = height - 1;
 	array[width * yArg + xArg].CycleColor(rArg, gArg, bArg);
-	return *this;
 }
-Image Image::SetAll(UINT rArg, UINT gArg, UINT bArg)
+void Image::SetAll(UINT rArg, UINT gArg, UINT bArg)
 {
 	for(int y = 0; y < height; ++y)
 	{
@@ -95,7 +92,6 @@ Image Image::SetAll(UINT rArg, UINT gArg, UINT bArg)
 			array[width * y + x].SetColor(rArg, gArg, bArg);
 		}
 	}
-	return *this;
 }
 void Image::Export(std::string name) const
 {

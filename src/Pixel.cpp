@@ -17,7 +17,6 @@ Pixel Pixel::SetColor(UCH rArg, UCH gArg, UCH bArg)
 	R = (UCH)rArg;
 	G = (UCH)gArg;
 	B = (UCH)bArg;
-	return *this;
 }
 Pixel Pixel::ChangeColor(UCH rArg, UCH gArg, UCH bArg)
 {
