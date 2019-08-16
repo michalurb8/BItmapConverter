@@ -4,7 +4,7 @@ A simple library for future bitmap generation
 
 ## code example (result in example.bmp file)
 
-\#include "Image.h"
+\#include "Image.h"  
 int main()  
 {  
     Image example(50, 50);  
