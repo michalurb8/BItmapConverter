@@ -18,8 +18,7 @@ public:
 	void Set();
 	UINT GetWidth() const;
 	UINT GetHeight() const;
-	void Print() const;
-	Pixel& GetPixel(UINT xArg, UINT yArg) const;
+	Pixel GetPixel(UINT xArg, UINT yArg) const;
 	void SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);
 	void ChangePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);
 	void CyclePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg);

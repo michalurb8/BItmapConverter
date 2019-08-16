@@ -1,15 +1,14 @@
-#include <iostream>
 #include "Image.h"
 
 int main()
 {
-	Image b(1,1);
-	b.SetAll(0, 0, 0);
-	b.SetPixel(0,0,0,0,0);
-	for(int i = 0; i < 260; ++i)
+	Image example(50, 50);
+	example.SetAll(0, 0, 50);
+	example.SetPixel(5,1,255,255,255);
+	for(int i = 0; i < 50; ++i)
 	{
-		b.ChangePixel(0,0,1,-1,1);
+		example.ChangePixel(0,0,1,-1,1);
 	}
-	b.Export();
+	example.Export("example");
 	return 0;
 }

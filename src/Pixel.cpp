@@ -1,24 +1,14 @@
-#include <iostream>
-#include <iomanip>
 #include "Pixel.h"
 
-Pixel::Pixel()
-{
-	R = G = B = 0;
-}
-Pixel::Pixel(UCH rArg, UCH gArg, UCH bArg)
+Pixel::Pixel() : R(0), G(0), B(0) {}
+Pixel::Pixel(UCH rArg, UCH gArg, UCH bArg) : R(rArg), G(gArg), B(bArg) {}
+void Pixel::SetColor(UCH rArg, UCH gArg, UCH bArg)
 {
 	R = rArg;
 	G = gArg;
 	B = bArg;
 }
-Pixel Pixel::SetColor(UCH rArg, UCH gArg, UCH bArg)
-{
-	R = (UCH)rArg;
-	G = (UCH)gArg;
-	B = (UCH)bArg;
-}
-Pixel Pixel::ChangeColor(int rArg, int gArg, int bArg)
+void Pixel::ChangeColor(UCH rArg, UCH gArg, UCH bArg) //add until 255 reached
 {
 	if(R + rArg < 0) R = 0;
 	else if (R + rArg > 255) R = 255;
@@ -29,62 +19,15 @@ Pixel Pixel::ChangeColor(int rArg, int gArg, int bArg)
 	if(B + bArg < 0) B = 0;
 	else if (B + bArg > 255) B = 255;
 	else B = B + bArg;
-	return *this;
 }
-Pixel Pixel::CycleColor(int rArg, int gArg, int bArg)
+void Pixel::CycleColor(UCH rArg, UCH gArg, UCH bArg) //add modulo 255
 {
-	R += (UCH)rArg;
-	G += (UCH)gArg;
-	B += (UCH)bArg;
-	return *this;
-}
-Pixel Pixel::SetRed(UCH rArg)
-{
-	R = rArg;
-	return *this;
-}
-Pixel Pixel::SetGreen(UCH gArg)
-{
-	G = gArg;
-	return *this;
-}
-Pixel Pixel::SetBlue(UCH bArg)
-{
-	B = bArg;
-}
-Pixel::UCH Pixel::GetRed() const
-{
-	return R;
-}
-Pixel::UCH Pixel::GetGreen() const
-{
-	return G;
-}
-Pixel::UCH Pixel::GetBlue() const
-{
-	return B;
-}
-Pixel::UINT Pixel::GetRedASCII() const
-{
-	return (UINT)R;
-}
-Pixel::UINT Pixel::GetGreenASCII() const
-{
-	return (UINT)G;
-}
-Pixel::UINT Pixel::GetBlueASCII() const
-{
-	return (UINT)B;
-}
-void Pixel::Print() const
-{
-	std::cout << std::setw(3) << std::left << UINT(R) << " ";
-	std::cout << std::setw(3) << std::left << UINT(G) << " ";
-	std::cout << std::setw(3) << std::left << UINT(B) << " ";
-	std::cout << "  ";
+	R += rArg;
+	G += gArg;
+	B += bArg;
 }
 std::ostream& operator<<(std::ostream& ss, const Pixel& arg)
 {
-	ss << arg.GetBlue() << arg.GetGreen() << arg.GetRed();
+	ss << arg.B << arg.G << arg.R;
 	return ss;
 }
