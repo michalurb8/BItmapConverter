@@ -1,7 +1,8 @@
 # BitMapConverter
 
-A simple library for future bitmap generation
+A simple library for pixel by pixel bitmap generation
 
+## make and eog required before use
 ## code example (result in example.bmp file)
 
 \#include "Image.h"  

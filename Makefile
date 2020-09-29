@@ -17,4 +17,4 @@ clean:
 
 run: clean build
 	src/exe
-	timeout 1s eog example.bmp
+	timeout 2s eog example.bmp

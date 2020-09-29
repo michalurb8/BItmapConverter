@@ -1,33 +1,41 @@
 #include "Pixel.h"
+#include <iostream>
 
 Pixel::Pixel() : R(0), G(0), B(0) {}
-Pixel::Pixel(UCH rArg, UCH gArg, UCH bArg) : R(rArg), G(gArg), B(bArg) {}
-void Pixel::SetColor(UCH rArg, UCH gArg, UCH bArg)
+Pixel::Pixel(short rArg, short gArg, short bArg) : R(rArg), G(gArg), B(bArg) {}
+
+void Pixel::SetColor(short rArg, short gArg, short bArg)
 {
 	R = rArg;
 	G = gArg;
 	B = bArg;
+	crop(R);
+	crop(G);
+	crop(B);
 }
-void Pixel::ChangeColor(UCH rArg, UCH gArg, UCH bArg) //add until 255 reached
-{
-	if(R + rArg < 0) R = 0;
-	else if (R + rArg > 255) R = 255;
-	else R = R + rArg;
-	if(G + gArg < 0) G = 0;
-	else if (G + gArg > 255) G = 255;
-	else G = G + gArg;
-	if(B + bArg < 0) B = 0;
-	else if (B + bArg > 255) B = 255;
-	else B = B + bArg;
-}
-void Pixel::CycleColor(UCH rArg, UCH gArg, UCH bArg) //add modulo 255
+
+void Pixel::ChangeColor(short rArg, short gArg, short bArg) //change but stay at limit
 {
 	R += rArg;
 	G += gArg;
 	B += bArg;
+	crop(R);
+	crop(G);
+	crop(B);
 }
-std::ostream& operator<<(std::ostream& ss, const Pixel& arg)
+
+void Pixel::CycleColor(short rArg, short gArg, short bArg) //add modulo 255
 {
-	ss << arg.B << arg.G << arg.R;
-	return ss;
+	R += rArg;
+	G += gArg;
+	B += bArg;
+	R %= 256;
+	G %= 256;
+	B %= 256;
+}
+
+void crop(short& value)
+{
+	if(value<0) value=0;
+	if(value>255) value=255;
 }

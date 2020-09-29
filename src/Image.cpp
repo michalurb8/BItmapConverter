@@ -1,5 +1,8 @@
 #include <fstream>
 #include "Image.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 Image::Image(UINT wArg, UINT hArg)
 {
@@ -9,12 +12,14 @@ Image::Image(UINT wArg, UINT hArg)
 	height = hArg;
 	Set();
 }
+
 Image::Image(const Image& arg)
 {
 	width = arg.GetWidth();
 	height = arg.GetHeight();
 	Set();
 }
+
 Image Image::operator=(const Image& arg)
 {
 	delete[] array;
@@ -23,55 +28,74 @@ Image Image::operator=(const Image& arg)
 	Set();
 	return *this;
 }
+
 Image::~Image()
 {
 	delete[] array;
 }
+
 void Image::Set()
 {
+	srand(time(NULL));
 	rowsize = width * 3 + 3 - (width * 3 - 1)%4; 	//size of one row in bytes
-	padding = rowsize - 3 * width; 					//size of padding at the end of a pixel row
-	size = rowsize * height; 						//size of the whole pixel array in bytes
+	padding = rowsize - 3 * width; 			//size of padding at the end of a pixel row
+	size = rowsize * height; 			//size of the whole pixel array in bytes
 
 	array = new Pixel[width * height];
 }
+
 Image::UINT Image::GetWidth() const
 {
 	return width;
 }
+
 Image::UINT Image::GetHeight() const
 {
 	return height;
 }
+
 Pixel Image::GetPixel(UINT xArg, UINT yArg) const
 {
 	return array[width * yArg + xArg];
 }
-void Image::SetPixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+
+void Image::SetPixel(short xArg, short yArg, short rArg, short gArg, short bArg)
 {
-	if(xArg >= width) return;
-	if(yArg >= height) return;
+	if(xArg >= (short)width || xArg<0) return;
+	if(yArg >= (short)height || yArg<0) return;
 	array[width * yArg + xArg].SetColor(rArg, gArg, bArg);
 }
-void Image::ChangePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+
+void Image::ChangePixel(short xArg, short yArg, short rArg, short gArg, short bArg)
 {
-	if(xArg >= width) xArg = width - 1;
-	if(yArg >= height) yArg = height - 1;
+	if(xArg >= (short)width || xArg<0) return;
+	if(yArg >= (short)height || yArg<0) return;
 	array[width * yArg + xArg].ChangeColor(rArg, gArg, bArg);
 }
-void Image::CyclePixel(UINT xArg, UINT yArg, UINT rArg, UINT gArg, UINT bArg)
+
+void Image::CyclePixel(short xArg, short yArg, short rArg, short gArg, short bArg)
 {
-	if(xArg >= width) xArg = width - 1;
-	if(yArg >= height) yArg = height - 1;
+	if(xArg >= (short)width || xArg<0) return;
+	if(yArg >= (short)height || yArg<0) return;
 	array[width * yArg + xArg].CycleColor(rArg, gArg, bArg);
 }
-void Image::SetAll(UINT rArg, UINT gArg, UINT bArg)
+
+void Image::SetAllRand()
+{
+	for(UINT i = 0; i < height*width; ++i)
+	{
+		array[i].SetColor(rand()%256, rand()%256, rand()%256);
+	}
+}
+
+void Image::SetAll(short rArg, short gArg, short bArg)
 {
 	for(UINT i = 0; i < height*width; ++i)
 	{
 		array[i].SetColor(rArg, gArg, bArg);
 	}
 }
+
 void Image::Export(std::string name) const
 {
 	std::ofstream output(name + ".bmp");
@@ -95,9 +119,10 @@ void Image::Export(std::string name) const
 	{
 		for(UINT x = 0; x < width; ++x)
 		{
-			output << this->GetPixel(x,y);
+			auto pix = this->GetPixel(x,y);
+			output << UCH(pix.B) << UCH(pix.G) << UCH(pix.R);
 		}
-		for(UINT j=0; j < padding; ++j)
+		for(UINT j = 0; j < padding; ++j)
 		{
 			output << std::ends;
 		}

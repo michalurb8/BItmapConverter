@@ -1,13 +1,12 @@
 #include "Image.h"
-
-int main()
+int main()  
 {
-	Image example(50, 50);
-	example.SetAll(0, 0, 50);
+	Image example(50,50);
+	example.SetAll(50,0,50);
 	example.SetPixel(5,1,255,255,255);
-	for(int i = 0; i < 50; ++i)
+	for(int x=10; x<60; ++x)
 	{
-		example.ChangePixel(0,0,1,-1,1);
+		example.ChangePixel(x,8,100,100,100);
 	}
 	example.Export("example");
 	return 0;
